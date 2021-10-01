@@ -11,7 +11,12 @@ config_version=4
 [application]
 
 config/name="Iconify"
+run/main_scene="res://Demo.tscn"
 config/icon="res://icon.png"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/Iconify/plugin.cfg" )
 
 [physics]
 

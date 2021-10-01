@@ -3,7 +3,7 @@ extends EditorPlugin
 
 const CONTENT = "Control/PanelContainer/Contents/"
 
-const popup_scene = preload("res://addons/Iconifier/IconifierPopup.tscn")
+const popup_scene = preload("res://addons/Iconify/Iconify.tscn")
 var canvas: CanvasLayer
 var popup: CenterContainer
 var overlay: ColorRect
@@ -24,7 +24,7 @@ var new_icon_name: LineEdit
 
 func _enter_tree():
 	add_tool_menu_item("Iconify", self, "iconify")
-	add_tool_menu_item("Available icons", self, "iconify_view_only")
+	add_tool_menu_item("Icon Browser", self, "iconify_view_only")
 	
 	# Custom canvaslayer and popup because window sizing is wack, at least currently (3.3.3.stable)
 	canvas = popup_scene.instance()
@@ -76,7 +76,7 @@ func icon_input(event, icon):
 			selected = icon
 			iconify_update()
 
-func iconify(_d):
+func iconify(_d = null):
 	var selected_nodes = get_editor_interface().get_selection().get_transformable_selected_nodes()
 	if selected_nodes.size() > 0:
 		var selected_node = get_editor_interface().get_selection().get_transformable_selected_nodes()[0]
@@ -99,13 +99,14 @@ func iconify(_d):
 		else:
 			show_input(true)
 			show_popup()
+			iconify_update()
 	else:
 		show_error(
 			"Error",
 			"Please select a node before using Iconify. If you just want to search for icons use ctrl+I"
 		)
 
-func iconify_view_only():
+func iconify_view_only(_d = null):
 	show_input(false)
 	show_popup()
 
@@ -158,8 +159,7 @@ func show_input(target: bool):
 	else:
 		cancel_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	apply_button.visible = target
-	
-	apply_button.disabled = true
+	apply_button.disabled = !target
 
 func show_popup():
 	new_icon_name.grab_focus()
@@ -174,7 +174,7 @@ func _exit_tree():
 	if canvas:
 		canvas.queue_free()
 	remove_tool_menu_item("Iconify")
-	remove_tool_menu_item("Available icons")
+	remove_tool_menu_item("Icon Browser")
 
 # Shortcuts
 func _unhandled_input(event):
@@ -188,5 +188,5 @@ func _unhandled_input(event):
 			if popup.visible:
 				if event.pressed && event.scancode == KEY_ESCAPE:
 					hide_popup()
-				if event.pressed && event.scancode == KEY_ENTER && !apply_button.disabled:
+				if event.pressed && event.scancode == KEY_ENTER && !apply_button.disabled && apply_button.visible:
 					apply()
