@@ -47,7 +47,7 @@ func _enter_tree():
 		var ici = get_icon(ic)
 		if ici.get_size() != Vector2(16, 16):
 			var im = ImageTexture.new()
-			var dat = ici.get_data()
+			var dat = ici.get_data().duplicate()
 			dat.resize(16, 16)
 			im.create_from_image(dat)
 			icr.texture = im
