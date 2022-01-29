@@ -33,7 +33,12 @@ Searching:
 
 ## Installation
 
-Once I get this addon in the official store you can easily install it from there, for now just:
+Automatic:
+- Search "Iconify" in the Asset Library
+- Click Download, then install
+- In `Project Settings` > `Plugins` set `Iconify` to `Enabled`
+
+Manual:
 
 - Copy the `Iconify` folder (inside `addons`) and paste it in your project's `addons` folder (folder **must** be named exactly `addons`, otherwise godot wont detect it)
 - Enable the addon inside Project > Project Settings > Plugins > Click `Enable` for the Iconify plugin
