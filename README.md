@@ -1,6 +1,6 @@
-# Iconify
-
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/N4N7LH6KJ)
+
+# Iconify
 
 Iconify offers an easily accessible Icon picker so you can focus on building a good editor UI without constantly switching tabs to assign them via script.
 
